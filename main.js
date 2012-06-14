@@ -5,6 +5,12 @@ var context,
         height: 500,
         x: 0,
         y: 0
+    },
+    bigBlackThing = {
+        width: 160,
+        height: 160,
+        x: 40,
+        y: 40
     };
 
 $(function(){
@@ -18,6 +24,7 @@ $(function(){
 
     $(document).keydown(function(e) {
         e.preventDefault();
+
         switch( e.which ) {
             case 37: viewport.x -= 5; break; // LEFT
             case 38: viewport.y -= 5; break; // UP
@@ -38,7 +45,7 @@ now.drawActors = function( actors ) {
     context.beginPath();
 
     for( var i in actors ) {
-        if( i==now.core.clientId) {
+        if( i==now.core.clientId ) {
             context.fillStyle = "red";
             context.fillRect( 
                 viewport.width/2  + actors[i].x - viewport.x,
@@ -59,6 +66,14 @@ now.drawActors = function( actors ) {
 
             context.strokeStyle = "#eee";
             context.stroke();
+
+            context.fillStyle = "black";
+            context.fillRect( 
+                bigBlackThing.x - viewport.x, 
+                bigBlackThing.y - viewport.y, 
+                bigBlackThing.width, 
+                bigBlackThing.width 
+            );
         } else {
             context.fillStyle = "black";
             context.fillRect(
