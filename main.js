@@ -5,6 +5,9 @@ var context,
         height: 500,
         x: 0,
         y: 0
+    },
+    prefs = {
+        color: colors[0]
     };
 
 $(function(){
@@ -30,6 +33,11 @@ $(function(){
         form.appendChild( fieldset );
     }
     
+    $('input[name=color]').change(function(){
+        prefs.color = $(this).val();
+        now.updateActor( viewport.x, viewport.y, prefs );
+    });
+    
 
     $(document).keydown(function(e) {
         e.preventDefault();
@@ -40,12 +48,11 @@ $(function(){
             case 39: viewport.x += 5; break; // RIGHT
             case 40: viewport.y += 5; break; // DOWN
         }
-        now.updateActor( viewport.x, viewport.y );
+        now.updateActor( viewport.x, viewport.y, prefs );
     });
 
     now.ready(function(){
-        now.updateActor( viewport.x, viewport.y );
-        now.recolorActor( colors[0] );
+        now.updateActor( viewport.x, viewport.y, prefs );
     });
 });
 
@@ -57,7 +64,6 @@ now.drawActors = function( actors ) {
     for( var i in actors ) {
         if( i==now.core.clientId ) {
         
-            console.log(actors);
             context.fillStyle = actors[i].color;
             context.fillRect( 
                 viewport.width/2  + actors[i].x - viewport.x,

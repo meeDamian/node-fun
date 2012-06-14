@@ -37,21 +37,19 @@ everyone.now.environment = {
     
 };
 
-everyone.now.recolorActor = function( color ) {
-    actors[ this.user.clientId ].color = color;
-};
-
-everyone.now.updateActor = function( x, y ) {
+everyone.now.updateActor = function( x, y, info ) {
 
     actors[ this.user.clientId ].x = x;
     actors[ this.user.clientId ].y = y;
+    actors[ this.user.clientId ].color = info.color;
 
     var toUpdate = {};
     for( var i in actors ) {
         if( Math.abs(x - actors[i].x)<310 && Math.abs(y - actors[i].y)<310 ) {
             toUpdate[i] = {
                 x: actors[i].x,
-                y: actors[i].y
+                y: actors[i].y,
+                color: actors[i].color
             };
         }
     }
