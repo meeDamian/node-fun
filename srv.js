@@ -26,6 +26,15 @@ nowjs.on('disconnect', function(){
     }
 });
 
+everyone.now.environment = {
+    bigBlackThing: {
+        width: 160,
+        height: 160,
+        x: 40,
+        y: 40
+    }
+};
+
 everyone.now.updateActor = function( x, y ) {
 
     actors[ this.user.clientId ].x = x;

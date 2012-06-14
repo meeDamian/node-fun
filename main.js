@@ -17,10 +17,25 @@ $(function(){
 
     context = $('#map')[0].getContext('2d');
 
+    var form = document.getElementById('colors');
     for( var i in colors ) {
-        var $n = $("");
-        colors[i];
+        var fieldset = document.createElement('fieldset'),
+            input = document.createElement('input'),
+            label = document.createElement('label');
+            
+        input.id = input.value = colors[i];
+        input.type = "radio";
+        input.name = "color";
+        if(i==0) input.setAttribute("checked", "checked");
+        fieldset.appendChild( input );
+        
+        label.setAttribute('for', colors[i] );
+        label.innerHTML = colors[i];
+        fieldset.appendChild( label );
+        
+        form.appendChild( fieldset );
     }
+    
 
     $(document).keydown(function(e) {
         e.preventDefault();
@@ -36,6 +51,7 @@ $(function(){
 
     now.ready(function(){
         now.updateActor( viewport.x, viewport.y );
+        console.log( now );
     });
 });
 
@@ -67,12 +83,13 @@ now.drawActors = function( actors ) {
             context.strokeStyle = "#eee";
             context.stroke();
 
+            var bbt = now.environment.bigBlackThing;
             context.fillStyle = "black";
             context.fillRect( 
-                bigBlackThing.x - viewport.x, 
-                bigBlackThing.y - viewport.y, 
-                bigBlackThing.width, 
-                bigBlackThing.width 
+                bbt.x - viewport.x, 
+                bbt.y - viewport.y, 
+                bbt.width, 
+                bbt.width 
             );
         } else {
             context.fillStyle = "black";
