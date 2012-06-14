@@ -39,6 +39,7 @@ everyone.now.environment = {
 
 everyone.now.updateActor = function( x, y, info ) {
 
+    // TODO: check is user move is allowed
     actors[ this.user.clientId ].x = x;
     actors[ this.user.clientId ].y = y;
     actors[ this.user.clientId ].color = info.color;
