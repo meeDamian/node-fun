@@ -14,7 +14,7 @@ var nowjs = require("now"),
     actors = [];
 
 nowjs.on('connect', function(){
-    actors[ this.user.clientId ] = { x:0, y:0 };
+    actors[ this.user.clientId ] = { x:0, y:0, color:"red" };
 });
 
 nowjs.on('disconnect', function(){
@@ -27,12 +27,18 @@ nowjs.on('disconnect', function(){
 });
 
 everyone.now.environment = {
+
     bigBlackThing: {
         width: 160,
         height: 160,
         x: 40,
         y: 40
     }
+    
+};
+
+everyone.now.recolorActor = function( color ) {
+    actors[ this.user.clientId ].color = color;
 };
 
 everyone.now.updateActor = function( x, y ) {
@@ -55,4 +61,4 @@ everyone.now.updateActor = function( x, y ) {
             this.now.drawActors( toUpdate );
         });
     }
-}
+};

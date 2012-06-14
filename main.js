@@ -5,12 +5,6 @@ var context,
         height: 500,
         x: 0,
         y: 0
-    },
-    bigBlackThing = {
-        width: 160,
-        height: 160,
-        x: 40,
-        y: 40
     };
 
 $(function(){
@@ -51,7 +45,7 @@ $(function(){
 
     now.ready(function(){
         now.updateActor( viewport.x, viewport.y );
-        console.log( now );
+        now.recolorActor( colors[0] );
     });
 });
 
@@ -62,7 +56,9 @@ now.drawActors = function( actors ) {
 
     for( var i in actors ) {
         if( i==now.core.clientId ) {
-            context.fillStyle = "red";
+        
+            console.log(actors);
+            context.fillStyle = actors[i].color;
             context.fillRect( 
                 viewport.width/2  + actors[i].x - viewport.x,
                 viewport.height/2 + actors[i].y - viewport.y,
@@ -92,7 +88,7 @@ now.drawActors = function( actors ) {
                 bbt.width 
             );
         } else {
-            context.fillStyle = "black";
+            context.fillStyle = actors[i].color;
             context.fillRect(
                 viewport.width/2  + actors[i].x - viewport.x,
                 viewport.height/2 + actors[i].y - viewport.y,
