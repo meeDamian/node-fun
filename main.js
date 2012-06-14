@@ -8,6 +8,10 @@ var context,
     },
     prefs = {
         color: colors[0]
+    },
+    count = {
+        current:0,
+        new:null
     };
 
 $(function(){
@@ -61,7 +65,11 @@ now.drawActors = function( actors ) {
     context.clearRect( 0, 0, viewport.width, viewport.height );
     context.beginPath();
 
+    count.new = 0;
     for( var i in actors ) {
+    
+        if( actors.hasOwnProperty(i) ) count.new++;
+        
         if( i==now.core.clientId ) {
         
             context.fillStyle = actors[i].color;
@@ -103,4 +111,10 @@ now.drawActors = function( actors ) {
             );
         }
     }
+    
+    if( count.current != count.new ) {
+        $('title').text( $('title').text().replace(/\(.*?\)/,"("+count.new+")") );
+        count.current = count.new;
+    }
+    
 };
